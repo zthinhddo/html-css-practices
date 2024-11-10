@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>HTML - CSS - JS practices</title>
+</head>
+
+<script>
+
+  function openSearchEngine() {
+    window.open("https://google.com", "Google");
+  }
+
+  function addTextNode(text) {
+    const newText = document.createTextNode(text);
+    const p1 = document.getElementById("p1");
+
+    p1.appendChild(newText);
+  }
+
+  function fetchDataAPI() {
+    const xmlHttpRequestObj = new XMLHttpRequest();
+    // using .this is doable
+    xmlHttpRequestObj.onreadystatechange = function () {
+      console.log('curr readyState: ', this.readyState);
+      if (this.readyState === XMLHttpRequest.DONE) {
+        if (this.status === 0 || this.status == 200) {
+          console.log('curr status: ', this.status);
+          console.log('response: ', this.responseText);
+        }
+      }
+    }
+
+    xmlHttpRequestObj.open("GET", 'https://jsonplaceholder.typicode.com/todos', true)
+    // xmlHttpRequestObj.setRequestHeader(); // must call this function after open
+    xmlHttpRequestObj.send()
+
+    addEventListener('progress', (event) => {
+      console.log('type: ', event.type);
+      console.log('data transfered (bytes): ', event.loaded);
+    })
+  }
+</script>
+
+<style>
+  .CSS-Style-Reference {
+    background-color: red;
+    width: 50%;
+    height: 300px;
+  }
+</style>
+
+<body>
+  <p id="p1">NO</p>
+  <button onclick="addTextNode('YES! ');">YES!</button>
+  <button onclick="openSearchEngine();">Open Search Engine</button>
+  <button onclick="fetchDataAPI();">Fetch Todo list</button>
+  <a href="https://www.ibm.com">IBM</a>
+  <div id="my-sidebar">
+    <aside>
+      <section id="widget-1">1</section>
+      <section id="widget-2">2</section>
+      <section id="widget-3">3</section>
+      <section id="widget-4">4</section>
+    </aside>
+  </div>
+  <article class="CSS-Style-Reference">
+    <figure>
+      <img src="./assets/images/image-1.png" height="100px" width="150px">
+      <figcaption>Fig.1 - Durham, NC</figcaption>
+    </figure>
+    <h2>HTML</h2>
+    <p>HTML stands for Hypertext Markup Language.
+      It is a standardized system for tagging text files to display specific
+      font, color, graphics, and hyperlinks on World Wide Web pages.</p>
+  </article>
+  <section id="my-form">
+    <form action="/path-somewhere">
+      <fieldset>
+        <legend>Personalia:</legend>
+        <label for="fname">First name:</label>
+        <input type="text" id="fname" name="fname"><br><br>
+        <label for="lname">Last name:</label>
+        <input type="text" id="lname" name="lname"><br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email"><br><br>
+        <label for="birthday">Birthday:</label>
+        <input type="date" id="birthday" name="birthday"><br><br>
+        <input type="submit" value="Submit">
+      </fieldset>
+    </form>
+  </section>
+</body>
+
+</html>
